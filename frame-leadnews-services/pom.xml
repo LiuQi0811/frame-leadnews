@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>frame-leadnews</artifactId>
+        <groupId>com.frame</groupId>
+        <version>3.6.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>frame-leadnews-services</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>admin-service</module>
+        <module>user-service</module>
+        <module>wemedia-service</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <!--  Nacos注册中心 客户端依赖      -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!--  Nacos配置中心 客户端依赖      -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 引入统一的feign依赖 -->
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-leadnews-feign</artifactId>
+            <version>${frame.version}</version>
+        </dependency>
+        <!-- 引入统一的数据模型依赖 -->
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-leadnews-model</artifactId>
+            <version>${frame.version}</version>
+        </dependency>
+        <!-- 引入统一的异常依赖 -->
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-exception-spring-boot-starter</artifactId>
+            <version>${frame.version}</version>
+        </dependency>
+        <!-- 引入统一的 knife4j 依赖       -->
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-knife4j-spring-boot-starter</artifactId>
+            <version>${frame.version}</version>
+        </dependency>
+
+    </dependencies>
+
+
+
+</project>
