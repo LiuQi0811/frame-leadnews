@@ -1,16 +1,16 @@
 package com.frame.user;
 
-import com.alibaba.nacos.shaded.org.checkerframework.checker.index.qual.SameLen;
+import com.alibaba.fastjson.JSON;
+import com.frame.feign.client.ArticleFeignClient;
 import com.frame.feign.client.WeMediaFeignClient;
+import com.frame.model.article.pojo.ApAuthor;
 import com.frame.model.common.ResponseResult;
 import com.frame.model.wemedia.pojo.WmUser;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.DigestUtils;
 
-import java.nio.charset.StandardCharsets;
 
 /*
  *@ClassName FeignTest
@@ -28,20 +28,48 @@ public class FeignTest {
 
     @Test
     public void findWmUser() {
-         ResponseResult<WmUser> responseResult = weMediaFeignClient.findByName("yunyouyou");
-        log.info(" {}",responseResult);
+        ResponseResult<WmUser> responseResult = weMediaFeignClient.findByName("yunyouyou");
+        log.info(" {}", responseResult);
+        log.info("获取结果对象 {}", JSON.toJSON(responseResult.getData()));
     }
+
     @Test
-    public void saveWmUser(){
+    public void saveWmUser() {
         WmUser wmUser = WmUser.builder()
-                .name("jsyy")
-                .apUserId("2")
-                .nickName("井上优雅")
+                .name("twfx")
+                .apUserId("1")
+                .nickName("天外飞仙")
                 .salt("abc")
-                .password(DigestUtils.md5DigestAsHex("adminabc".getBytes(StandardCharsets.UTF_8)))
+                .password("hhhhh")
                 .phone("13173478377")
                 .email("398904988@qq.com")
+                .score("0")
+                .type("0")
                 .build();
         weMediaFeignClient.save(wmUser);
+    }
+
+
+    @Autowired
+    private ArticleFeignClient articleFeignClient;
+
+    @Test
+    public void findApAuthorByUserId() {
+        ResponseResult<ApAuthor> responseResult = articleFeignClient.findByUserId("1");
+        log.info(" {}", responseResult);
+        log.info("获取结果对象 {}", JSON.toJSON(responseResult.getData()));
+    }
+
+    @Test
+    public void saveApAutor(){
+        ApAuthor apAuthor = ApAuthor.builder()
+                .userId("1")
+                .type("2")
+                .name("树下一只梅")
+                .WmUserId("d3029be56c79450996c05907931b671b")
+                .build();
+        log.info("参数 {}",JSON.toJSON(apAuthor));
+        ResponseResult responseResult = articleFeignClient.save(apAuthor);
+        log.info(" {}", responseResult);
     }
 }

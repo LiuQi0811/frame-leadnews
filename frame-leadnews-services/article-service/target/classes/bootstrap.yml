@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: leadnews-article #服务名称
+  profiles:
+    active: dev #开发环境配置
+    ip: 192.168.0.118 # 开发环境ip地址
+  cloud:
+    nacos:
+      server-addr: ${spring.profiles.ip}:8848
+      discovery:
+        namespace: 93667ead-f596-42ca-85a9-bf9b4ab11118
+      config: # 配置中心地址配置
+        namespace: 93667ead-f596-42ca-85a9-bf9b4ab11118
+        file-extension: yml # data-id 后缀名
+        name: ${spring.application.name}
+        shared-configs: #共享配置
+          - data-id: share-feign.yml
+            group: DEFAULT_GROUP
+            refresh: false
+
+
+

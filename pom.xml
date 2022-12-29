@@ -26,6 +26,7 @@
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
         <mysql.version>8.0.31</mysql.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -76,6 +77,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="frame-leadnews-utils" />
+        <module name="wemedia-service" />
+        <module name="admin-gateway" />
+        <module name="article-service" />
+        <module name="frame-exception-spring-boot-starter" />
+        <module name="frame-knife4j-spring-boot-starter" />
+        <module name="frame-leadnews-common" />
+        <module name="frame-leadnews-feign" />
+        <module name="user-service" />
+        <module name="frame-leadnews-model" />
+        <module name="admin-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

@@ -7,7 +7,7 @@ import com.frame.model.user.pojo.ApUserRealName;
 
 /*
  *@ClassName ApUserRealNameService
- *@Description TODO
+ *@Description 用户实名认证 逻辑层
  *@Author LiuQi
  *@Date 2022/12/24 18:49
  *@Version 1.0
@@ -19,4 +19,12 @@ public interface ApUserRealNameService extends IService<ApUserRealName> {
      * @return
      */
     ResponseResult loadListByStatus(AuthDTO authDTO);
+
+    /**
+     * 根据状态进行审核
+     * @param authDTO
+     * @param status 2 审核失败 9审核成功
+     * @return
+     */
+    ResponseResult updateStatusById(AuthDTO authDTO,String status);
 }

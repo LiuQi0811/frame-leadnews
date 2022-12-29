@@ -12,7 +12,7 @@ import javax.annotation.security.PermitAll;
 
 /*
  *@ClassName WmUserController
- *@Description 自媒体用户 相关接口API"
+ *@Description 自媒体用户 相关接口API
  *@Author LiuQi
  *@Date 2022/12/25 13:03
  *@Version 1.0

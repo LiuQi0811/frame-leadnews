@@ -15,6 +15,7 @@
         <module>admin-service</module>
         <module>user-service</module>
         <module>wemedia-service</module>
+        <module>article-service</module>
     </modules>
 
     <properties>
@@ -65,6 +66,18 @@
             <groupId>com.frame</groupId>
             <artifactId>frame-knife4j-spring-boot-starter</artifactId>
             <version>${frame.version}</version>
+        </dependency>
+
+        <!-- 引入统一的 common 依赖       -->
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-leadnews-common</artifactId>
+            <version>${frame.version}</version>
+        </dependency>
+        <!-- fastjson 依赖       -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
 
     </dependencies>

@@ -1,6 +1,7 @@
 package com.frame.model.user.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /*
@@ -22,9 +24,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @TableName(value = "ap_user_realname")
-public class ApUserRealName {
+public class ApUserRealName implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键")
+    @TableId
     private String id;
     /**
      * 账号id

@@ -19,6 +19,7 @@ public enum AppHttpCodeEnum {
     LOGIN_PASSWORD_ERROR(2, "密码错误"),
     LOGIN_STATUS_ERROR(3, "用户状态异常，请联系管理员"),
     PARAM_INVALID(50, "无效参数"),
+    DATA_EXIST(1000, "数据已存在"),
     DATA_NOT_EXIST(1002, "数据不存在"),
     DATA_INSERT_ERROR(510, "数据保存失败"),
     DATA_NOT_ALLOW(1003, "数据不允许此操作"),

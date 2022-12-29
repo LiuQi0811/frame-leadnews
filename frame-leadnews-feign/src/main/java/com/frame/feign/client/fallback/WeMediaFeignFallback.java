@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /*
  *@ClassName WeMediaFeignFallback
- *@Description 服务降级
+ *@Description 自媒体feign 服务降级
  *@Author LiuQi
  *@Date 2022/12/27 18:55
  *@Version 1.0
@@ -26,14 +26,14 @@ public class WeMediaFeignFallback implements FallbackFactory<WeMediaFeignClient>
             @Override
             public ResponseResult<WmUser> findByName(String name) {
                 log.error("参数：{}",name);
-                log.error("根据用户名查询自媒体用户 远程调用出错啦！ {}",throwable.getMessage());
+                log.error("根据用户名查询自媒体用户 WeMediaFeignClient findByName 远程调用出错啦！ {}",throwable.getMessage());
                 return ResponseResult.errorResult(AppHttpCodeEnum.REMOTE_SERVER_ERROR);
             }
 
             @Override
             public ResponseResult<WmUser> save(WmUser wmUser) {
                 log.error("参数：{}",wmUser);
-                log.error("保存自媒体用户 远程调用出错啦！ {}",throwable.getMessage());
+                log.error("保存自媒体用户 WeMediaFeignClient save 远程调用出错啦！ {}",throwable.getMessage());
                 return ResponseResult.errorResult(AppHttpCodeEnum.REMOTE_SERVER_ERROR);
             }
         };
