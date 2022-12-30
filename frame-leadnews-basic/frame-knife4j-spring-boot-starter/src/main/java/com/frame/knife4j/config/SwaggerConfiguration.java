@@ -1,43 +1,33 @@
 package com.frame.knife4j.config;
-import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
-import org.springframework.beans.factory.annotation.Value;
+
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Profile;
-import org.springframework.core.annotation.Order;
-import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;import springfox.documentation.service.ApiInfo;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
- *@ClassName Swagger2Configuration
- *@Description knife4j swagger文档配置
+ *@ClassName SwaggerConfiguration
+ *@Description swagger文档配置
  *@Author LiuQi
- *@Date 2022/12/30 19:03
+ *@Date 2022/12/20 13:36
  *@Version 1.0
  */
 @Configuration
 @EnableSwagger2
-//@EnableSwaggerBootstrapUI
-@Import(value = BeanValidatorPluginsConfiguration.class)
-public class Swagger2Configuration {
-    @Value("${spring.application.name}")
-    private String group;
+public class SwaggerConfiguration {
 
-
-
-    @Bean(value = "defaultApi2")
-    @Order(value = 1)
-    public Docket defaultApi2() {
+    @Bean
+    public Docket buildDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName(group)//分组名称
-                .apiInfo(apiInfo())
+                .groupName("1.0")
+                .apiInfo(buildApiInfo())
                 .select()
                 // 要扫描的API(Controller)基础包
                 .apis(RequestHandlerSelectors.basePackage("com.frame"))
@@ -45,7 +35,7 @@ public class Swagger2Configuration {
                 .build();
     }
 
-    private ApiInfo apiInfo() {
+    private ApiInfo buildApiInfo() {
         return new ApiInfoBuilder()
                 .title("Frame 平台API管理文档")
                 .description("平台管理服务api")
@@ -53,4 +43,4 @@ public class Swagger2Configuration {
                 .version("1.0.0")
                 .build();
     }
-    }
+}

@@ -3,7 +3,6 @@ package com.frame.feign.client;
 import com.frame.feign.client.fallback.ArticleFeignFallback;
 import com.frame.model.article.pojo.ApAuthor;
 import com.frame.model.common.ResponseResult;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

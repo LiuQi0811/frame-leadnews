@@ -3,7 +3,6 @@ package com.frame.feign.client;
 import com.frame.feign.client.fallback.WeMediaFeignFallback;
 import com.frame.model.common.ResponseResult;
 import com.frame.model.wemedia.pojo.WmUser;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

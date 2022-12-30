@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.frame.knife4j.config.Swagger2Configuration
+com.frame.knife4j.config.SwaggerConfiguration,com.frame.knife4j.config.Swagger2Configuration
