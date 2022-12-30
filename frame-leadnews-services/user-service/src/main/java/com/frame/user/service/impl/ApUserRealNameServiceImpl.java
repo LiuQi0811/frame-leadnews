@@ -78,6 +78,9 @@ public class ApUserRealNameServiceImpl extends ServiceImpl<ApUserRealNameMapper,
         }
         //根据实名认证的id 查询 ap_user_realname数据           ap_user_realname(userId) 用户认证信息
         ApUserRealName apUserRealName = this.getById(authDTO.getId()); //获取实名认证信息对象
+        if (apUserRealName==null) {
+            throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_NOT_EXIST,"未获取到实名认证信息");
+        }
         // 判断实名认证的状态是否是待审核 （1 待审核 2 失败 9 通过）
         if (!apUserRealName.getStatus().equals(AdminConstants.WAIT_AUTH)) {
             throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_NOT_ALLOW, "实名认证的状态不是待审核状态");
@@ -102,7 +105,7 @@ public class ApUserRealNameServiceImpl extends ServiceImpl<ApUserRealNameMapper,
         // 创建文章作者信息 是否已经创建 保存作者信息     ap_author 文章作者信息
         createApAuthor(apUser, wmUser);
 
-        return null;
+        return ResponseResult.okResult();
     }
 
     @Autowired
@@ -119,23 +122,24 @@ public class ApUserRealNameServiceImpl extends ServiceImpl<ApUserRealNameMapper,
         ResponseResult<ApAuthor> result = articleFeignClient.findByUserId(apUser.getId());
         if (!result.checkCode()) {
             //远程调用失败
-            throw new CustomExceptionHandler(AppHttpCodeEnum.REMOTE_SERVER_ERROR,result.getErrorMessage());
+            throw new CustomExceptionHandler(AppHttpCodeEnum.REMOTE_SERVER_ERROR, result.getErrorMessage());
         }
         //判断 作者信息是否存在
         ApAuthor apAuthor = result.getData(); //获取文章作者信息
-        if (apAuthor!=null) {
-            throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_EXIST,"文章作者信息已存在");
+        if (apAuthor != null) {
+            throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_EXIST, "文章作者信息已存在");
         }
         //创建文章作者信息  保存
         apAuthor = ApAuthor.builder()
-                .id(UUID.randomUUID().toString().replaceAll("-",""))
+                .id(UUID.randomUUID().toString().replaceAll("-", ""))
+                .name(apUser.getName())
                 .type("2")
                 .userId(apUser.getId())// 用户id
                 .WmUserId(wmUser.getId()) //自媒体用户id
                 .createTime(LocalDateTime.now())
                 .build();
         ResponseResult saveResult = articleFeignClient.save(apAuthor);
-        if (!saveResult.checkCode()){
+        if (!saveResult.checkCode()) {
             //远程调用失败
             throw new CustomExceptionHandler(AppHttpCodeEnum.REMOTE_SERVER_ERROR, saveResult.getErrorMessage());
         }

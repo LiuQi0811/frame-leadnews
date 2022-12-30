@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 /*
  *@ClassName AdChannelController
- *@Description TODO
+ *@Description 频道信息 相关接口API
  *@Author LiuQi
  *@Date 2022/12/20 11:01
  *@Version 1.0

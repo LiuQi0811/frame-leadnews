@@ -33,9 +33,9 @@ public class WmUserServiceImpl extends ServiceImpl<WmUserMapper, WmUser> impleme
     @Override
     public ResponseResult findWeMediaUserByName(String name) {
         WmUser wmUser = this.getOne(Wrappers.<WmUser>lambdaQuery().eq(WmUser::getName, name));
-        if (wmUser == null) {
-            throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_NOT_EXIST, "用户信息不存在");
-        }
+//        if (wmUser == null) {
+//            throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_NOT_EXIST, "用户信息不存在");
+//        }
         return ResponseResult.okResult(wmUser);
     }
 
