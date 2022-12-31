@@ -15,6 +15,7 @@
         <module>frame-leadnews-model</module>
         <module>frame-leadnews-services</module>
         <module>frame-leadnews-utils</module>
+        <module>frame-leadnews-test</module>
     </modules>
 
     <properties>
