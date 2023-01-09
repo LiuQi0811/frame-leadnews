@@ -14,6 +14,7 @@
     <modules>
         <module>frame-knife4j-spring-boot-starter</module>
         <module>frame-exception-spring-boot-starter</module>
+        <module>frame-file-spring-boot-starter</module>
     </modules>
 
     <properties>

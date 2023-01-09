@@ -17,6 +17,9 @@ spring:
           - data-id: share-feign.yml
             group: DEFAULT_GROUP
             refresh: false
+          - data-id: share-seata.yml
+            group: DEFAULT_GROUP
+            refresh: false #是否动态刷新，默认false
 
 
 

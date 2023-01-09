@@ -28,12 +28,14 @@
         <dependency>
             <groupId>com.frame</groupId>
             <artifactId>frame-leadnews-model</artifactId>
-            <version>${frame.version}</version>
         </dependency>
         <dependency>
             <groupId>com.frame</groupId>
             <artifactId>frame-exception-spring-boot-starter</artifactId>
-            <version>${frame.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-leadnews-seata</artifactId>
         </dependency>
     </dependencies>
 

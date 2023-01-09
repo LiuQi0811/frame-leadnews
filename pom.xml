@@ -16,6 +16,7 @@
         <module>frame-leadnews-services</module>
         <module>frame-leadnews-utils</module>
         <module>frame-leadnews-test</module>
+        <module>frame-leadnews-seata</module>
     </modules>
 
     <properties>
@@ -28,6 +29,7 @@
         <mysql.version>8.0.31</mysql.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <fastjson.version>1.2.83</fastjson.version>
+        <seata.version>1.4.2</seata.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -47,6 +49,30 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- seata 依赖-->
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <!-- seata starter 采用1.4.2 版本    -->
+                <version>${seata.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>frame-leadnews-model</artifactId>
+                <version>${frame.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>frame-exception-spring-boot-starter</artifactId>
+                <version>${frame.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.frame</groupId>
+                <artifactId>frame-leadnews-seata</artifactId>
+                <version>${frame.version}</version>
             </dependency>
 
             <!-- SpringCloud 微服务 -->

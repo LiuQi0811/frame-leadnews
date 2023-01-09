@@ -105,6 +105,12 @@ public class ApUserRealNameServiceImpl extends ServiceImpl<ApUserRealNameMapper,
         // 创建文章作者信息 是否已经创建 保存作者信息     ap_author 文章作者信息
         createApAuthor(apUser, wmUser);
 
+        //异常抛出测试
+         if (authDTO.getId().equals("9d6af42311a747d39ca0b33c2e2cfeec")) {
+            throw new CustomExceptionHandler(AppHttpCodeEnum.PARAM_INVALID,"演示异常，用于分布式");
+        }
+
+
         return ResponseResult.okResult();
     }
 

@@ -9,14 +9,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="frame-leadnews-utils" />
         <module name="wemedia-service" />
+        <module name="frame-file-spring-boot-starter" />
         <module name="admin-gateway" />
-        <module name="article-service" />
         <module name="frame-exception-spring-boot-starter" />
         <module name="frame-knife4j-spring-boot-starter" />
         <module name="frame-leadnews-common" />
         <module name="frame-leadnews-feign" />
         <module name="user-service" />
         <module name="frame-leadnews-model" />
+        <module name="frame-leadnews-seata" />
+        <module name="article-service" />
+        <module name="aliyun-oss" />
         <module name="admin-service" />
       </profile>
     </annotationProcessing>
