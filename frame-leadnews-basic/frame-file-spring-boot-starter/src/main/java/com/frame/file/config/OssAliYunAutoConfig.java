@@ -2,18 +2,11 @@ package com.frame.file.config;
 
 import com.aliyun.oss.*;
 import com.aliyun.oss.common.comm.Protocol;
-import com.aliyun.oss.model.PutObjectRequest;
-import com.aliyun.oss.model.PutObjectResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
 /*
  *@ClassName OssAliYunAutoConfig
  *@Description oss文件存储 自动配置类
@@ -60,35 +53,6 @@ public class OssAliYunAutoConfig {
     public OSS ossClient() {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(properties.getEndpoint(), properties.getAccessKeyId(), properties.getAccessKeySecret());
-        try {
-            InputStream inputStream = new FileInputStream(filePath);
-            // 创建PutObjectRequest对象。
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectName, inputStream);
-            // 设置该属性可以返回response。如果不设置，则返回的response为空。
-            putObjectRequest.setProcess("true");
-            // 创建PutObject请求。
-            PutObjectResult result = ossClient.putObject(putObjectRequest);
-            // 如果上传成功，则返回200。
-            System.out.println(result.getResponse().getStatusCode());
-        } catch (OSSException oe) {
-            log.info("Caught an OSSException, which means your request made it to OSS, "
-                    + "but was rejected with an error response for some reason.");
-            log.info("Error Message:" + oe.getErrorMessage());
-            log.info("Error Code:" + oe.getErrorCode());
-            log.info("Request ID:" + oe.getRequestId());
-            log.info("Host ID:" + oe.getHostId());
-        } catch (ClientException ce) {
-            log.info("Caught an ClientException, which means the client encountered "
-                    + "a serious internal problem while trying to communicate with OSS, "
-                    + "such as not being able to access the network.");
-            log.info("Error Message:" + ce.getMessage());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
-        }
         return ossClient;
     }
 }
