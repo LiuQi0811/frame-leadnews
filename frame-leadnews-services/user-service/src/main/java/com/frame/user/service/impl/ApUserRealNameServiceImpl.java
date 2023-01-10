@@ -19,6 +19,7 @@ import com.frame.model.wemedia.pojo.WmUser;
 import com.frame.user.mapper.ApUserMapper;
 import com.frame.user.mapper.ApUserRealNameMapper;
 import com.frame.user.service.ApUserRealNameService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,8 @@ public class ApUserRealNameServiceImpl extends ServiceImpl<ApUserRealNameMapper,
      * @param status  2 审核失败 9审核成功
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
+    @GlobalTransactional(rollbackFor = Exception.class,timeoutMills = 300000) // 超时⌚时间 300秒
     @Override
     public ResponseResult updateStatusById(AuthDTO authDTO, String status) {
         //验证参数 实名认证id不能为空
