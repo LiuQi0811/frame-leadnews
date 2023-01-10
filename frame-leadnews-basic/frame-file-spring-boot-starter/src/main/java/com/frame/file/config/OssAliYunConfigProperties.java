@@ -59,10 +59,14 @@ public class OssAliYunConfigProperties implements Serializable {
      */
     private Integer connectionTimeout;
     /**
-     * 设置连接空闲的超时时间，超时则关闭连接，默认60000毫秒
+     * 设置连接池中获取空闲的超时时间，超时则关闭连接
      */
     private Integer connectionRequestTimeout;
-    private Integer idleConnectionTimeout;
+
+    /**
+     * 设置连接空闲的超时时间，超时则关闭连接，默认60000毫秒
+     */
+    private Integer idleConnectionTime;
 
     /**
      * 设置失败请求重试次数，默认3次
