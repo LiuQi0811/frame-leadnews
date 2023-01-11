@@ -36,4 +36,10 @@ public class OSSTest {
         log.info("获取 oss的文件路径  {}", webSite + store);
 
     }
+
+    @Test
+    public void delete(){
+        fileStorageService.delete("https://frame-leadnews.oss-cn-shanghai.aliyuncs.com/0001.jpeg");
+        log.info("删除oss文件成功");
+    }
 }
