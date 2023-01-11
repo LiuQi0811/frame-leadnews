@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /*
  *@ClassName OSSTest
  *@Description TODO
@@ -17,16 +20,20 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootTest
 @Slf4j
-public class OSSTest
-{
+public class OSSTest {
     @Autowired
     FileStorageService fileStorageService;
     @Value("${file.oss.prefix}")
     String prefix;
     @Value("${file.oss.web-site}")
     String webSite;
+
     @Test
-    public void upload(){
-        log.info("_____ {}   {}",prefix,webSite);
+    public void upload() throws FileNotFoundException {
+        log.info("_____ {}   {}", prefix, webSite);
+        String store = fileStorageService.store(prefix, "mei_nv.jpg", new FileInputStream("/Users/liuqi/Desktop/图片素材/WechatIMG9336.jpeg"));
+        log.info("文件在 oss路径  {}", store);
+        log.info("获取 oss的文件路径  {}", webSite + store);
+
     }
 }
