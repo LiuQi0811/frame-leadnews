@@ -31,7 +31,7 @@ public class OSSTest {
     @Test
     public void upload() throws FileNotFoundException {
         log.info("_____ {}   {}", prefix, webSite);
-        String store = fileStorageService.store(prefix, "mei_nv.jpg", new FileInputStream("/Users/liuqi/Desktop/图片素材/WechatIMG9336.jpeg"));
+        String store = fileStorageService.store(prefix, "mei_nv1.jpg", new FileInputStream("/Users/liuqi/Desktop/图片素材/WechatIMG9336.jpeg"));
         log.info("文件在 oss路径  {}", store);
         log.info("获取 oss的文件路径  {}", webSite + store);
 
@@ -39,7 +39,8 @@ public class OSSTest {
 
     @Test
     public void delete(){
-        fileStorageService.delete("https://frame-leadnews.oss-cn-shanghai.aliyuncs.com/0001.jpeg");
+//        fileStorageService.delete("https://frame-leadnews.oss-cn-shanghai.aliyuncs.com/0001.jpeg");
+        fileStorageService.delete("material/2023/1/20230111/mei_nv1.jpg");
         log.info("删除oss文件成功");
     }
 }
