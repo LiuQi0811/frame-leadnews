@@ -2,6 +2,7 @@ package com.frame.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.frame.model.common.ResponseResult;
+import com.frame.model.wemedia.dto.WmUserDTO;
 import com.frame.model.wemedia.pojo.WmUser;
 
 /*
@@ -25,4 +26,12 @@ public interface WmUserService extends IService<WmUser> {
      * @return
      */
     ResponseResult insert(WmUser wmUser);
+
+    /**
+     * 自媒体用户 登录
+     * @param wmUserDTO
+     * @return
+     */
+    ResponseResult login(WmUserDTO wmUserDTO);
+
 }

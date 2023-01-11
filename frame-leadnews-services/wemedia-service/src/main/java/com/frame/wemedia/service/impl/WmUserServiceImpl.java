@@ -5,14 +5,21 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.frame.exception.common.CustomExceptionHandler;
 import com.frame.model.common.ResponseResult;
 import com.frame.model.common.enums.AppHttpCodeEnum;
+import com.frame.model.wemedia.dto.WmUserDTO;
 import com.frame.model.wemedia.pojo.WmUser;
+import com.frame.model.wemedia.vo.WmUserVO;
+import com.frame.utils.common.AppJwtUtil;
 import com.frame.wemedia.mapper.WmUserMapper;
 import com.frame.wemedia.service.WmUserService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /*
@@ -59,5 +66,46 @@ public class WmUserServiceImpl extends ServiceImpl<WmUserMapper, WmUser> impleme
             throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_INSERT_ERROR);
         }
         return ResponseResult.okResult(wmUser);
+    }
+
+    /**
+     * 自媒体用户 登录
+     *
+     * @param wmUserDTO
+     * @return
+     */
+    @Override
+    public ResponseResult login(WmUserDTO wmUserDTO) {
+        //校验参数 name password
+        String name = wmUserDTO.getName();
+        String password = wmUserDTO.getPassword();
+        if (StringUtils.isAnyBlank(name, password)) {
+            throw new CustomExceptionHandler(AppHttpCodeEnum.PARAM_INVALID, "用户名或者密码不能为空");
+        }
+        //根据用户名 查询用户
+        ResponseResult<WmUser> responseResult = this.findWeMediaUserByName(name);
+        if (responseResult.getCode() != 0) {
+          throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_NOT_EXIST,"用户不存在");
+        }
+        WmUser wmUser = responseResult.getData();
+        //判断输入的密码 和 数据库储存的密码是否一致
+        String md5DigestAsHex = DigestUtils.md5DigestAsHex((wmUserDTO.getPassword() + wmUser.getSalt()).getBytes(StandardCharsets.UTF_8));
+        if (!md5DigestAsHex.equals(wmUser.getPassword())){
+            throw new CustomExceptionHandler(AppHttpCodeEnum.LOGIN_PASSWORD_ERROR);
+        }
+        //判断用户状态
+        if(!wmUser.getStatus().equals("9")){
+            throw new CustomExceptionHandler(AppHttpCodeEnum.LOGIN_STATUS_ERROR);
+        }
+        //修改 最后的登录时间
+        wmUser.setLoginTime(LocalDateTime.now());
+        //颁发token 凭证
+        String token = AppJwtUtil.getToken(Long.valueOf(wmUser.getId()));
+        WmUserVO wmUserVO = new WmUserVO();
+        BeanUtils.copyProperties(wmUser,wmUserVO);
+        Map<String,Object> result =new HashMap<>();
+        result.put("token",token);
+        result.put("user",wmUserVO);
+        return ResponseResult.okResult(result);
     }
 }
