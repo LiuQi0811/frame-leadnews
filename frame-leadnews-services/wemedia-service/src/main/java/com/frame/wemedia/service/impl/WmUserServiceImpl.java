@@ -84,7 +84,7 @@ public class WmUserServiceImpl extends ServiceImpl<WmUserMapper, WmUser> impleme
         }
         //根据用户名 查询用户
         ResponseResult<WmUser> responseResult = this.findWeMediaUserByName(name);
-        if (responseResult.getCode() != 0) {
+        if (responseResult.getData() == null) {
           throw new CustomExceptionHandler(AppHttpCodeEnum.DATA_NOT_EXIST,"用户不存在");
         }
         WmUser wmUser = responseResult.getData();

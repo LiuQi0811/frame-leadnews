@@ -19,6 +19,7 @@
         <module name="frame-leadnews-model" />
         <module name="frame-leadnews-seata" />
         <module name="article-service" />
+        <module name="wemedia-gateway" />
         <module name="aliyun-oss" />
         <module name="admin-service" />
       </profile>
