@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @ConfigurationProperties(prefix = "file.oss") //文件上传 配置前缀 file.oss
 public class OssAliYunConfigProperties implements Serializable {

@@ -4,11 +4,13 @@ import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.*;
+import com.frame.file.config.OssAliYunAutoConfig;
 import com.frame.file.config.OssAliYunConfigProperties;
 import com.frame.file.service.FileStorageService;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /*
  *@ClassName OssAliyunFileStorageService
@@ -28,9 +31,12 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@Import(value = OssAliYunAutoConfig.class)
+@Primary
+@EnableConfigurationProperties(value = OssAliYunConfigProperties.class)
 public class OssAliYunFileStorageService implements FileStorageService {
 
-    @Autowired
+    @Autowired(required = false)
     private OSS ossClient;
     @Autowired
     private OssAliYunConfigProperties properties;
@@ -119,7 +125,7 @@ public class OssAliYunFileStorageService implements FileStorageService {
     @Override
     public void delete(String pathUrl) {
         String key = pathUrl.replace(properties.getWebSite(), "");
-        List<String> keys = Lists.newArrayList();
+        List<String> keys = newArrayList();
         keys.add(key);
         ossClient.deleteObjects(new DeleteObjectsRequest(properties.getBucketName()).withKeys(keys)); //删除 deleteObjects
     }

@@ -2,8 +2,13 @@ package com.frame.file.config;
 
 import com.aliyun.oss.*;
 import com.aliyun.oss.common.comm.Protocol;
+import com.aliyun.oss.model.CannedAccessControlList;
+import com.aliyun.oss.model.CreateBucketRequest;
+import com.frame.file.service.FileStorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(value = OssAliYunConfigProperties.class) //开启文件配置读取
 @Slf4j
+@ConditionalOnClass(value = FileStorageService.class)
 public class OssAliYunAutoConfig {
     @Autowired
     private OssAliYunConfigProperties properties;
@@ -50,9 +56,17 @@ public class OssAliYunAutoConfig {
      * @return
      */
     @Bean
+    @ConditionalOnBean(value = ClientConfiguration.class)
     public OSS ossClient() {
+        log.info("开始创建 OSS 客户端........");
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(properties.getEndpoint(), properties.getAccessKeyId(), properties.getAccessKeySecret());
+        if(!ossClient.doesBucketExist(properties.getBucketName())){
+            ossClient.createBucket(properties.getBucketName());
+            CreateBucketRequest createBucketRequest = new CreateBucketRequest(properties.getBucketName());
+            createBucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
+            ossClient.createBucket(createBucketRequest);
+        }
         return ossClient;
     }
 }

@@ -37,7 +37,13 @@
             <groupId>com.frame</groupId>
             <artifactId>frame-leadnews-seata</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.frame</groupId>
+            <artifactId>frame-file-spring-boot-starter</artifactId>
+            <version>3.6.1</version>
+        </dependency>
     </dependencies>
+
 
 
 </project>
