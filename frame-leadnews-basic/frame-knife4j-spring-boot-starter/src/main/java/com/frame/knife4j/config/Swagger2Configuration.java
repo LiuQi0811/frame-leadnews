@@ -1,4 +1,5 @@
 package com.frame.knife4j.config;
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *@Date 2022/12/30 19:03
  *@Version 1.0
  */
+@EnableKnife4j
 @Configuration
 @EnableSwagger2
 //@EnableSwaggerBootstrapUI
