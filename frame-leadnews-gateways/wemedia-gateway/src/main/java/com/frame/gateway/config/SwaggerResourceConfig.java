@@ -41,10 +41,39 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
                                     predicateDefinition
                                             .getArgs()
                                             .get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                            .replace("**", "v2/api-docs"))));
+                                            .replace("**", "v2/api-docs?group=" + route.getId()))));
+//                                            .replace("**", "v2/api-docs"))));
                 });
         return resources;
     }
+
+//    @Override // 请求网关时就会执行此方法
+//    public List<SwaggerResource> get() {
+//        List<SwaggerResource> resources = new ArrayList<>();
+//        List<String> routes = new ArrayList<>();
+//        //获取所有路由的ID并加入到routes里
+//        routeLocator.getRoutes().subscribe(route -> routes.add(route.getId()));
+//        //过滤出配置文件中定义的路由->过滤出Path Route Predicate->根据路径拼接成api-docs路径->生成SwaggerResource
+//        gatewayProperties.getRoutes().stream().filter(routeDefinition -> routes.contains(routeDefinition.getId())).forEach(route -> {
+//            route.getPredicates().stream()
+//                    .filter(predicateDefinition ->{
+//                        boolean condition1 =("Path").equalsIgnoreCase(predicateDefinition.getName());
+//                        String url = predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0");
+//                        boolean condition2=false;
+//                        if(url.length()>9){
+//                            condition2 = ("/swagger/").equalsIgnoreCase(url.substring(0,9));
+//                        }
+//                        return condition1 && condition2;
+//                    })
+//                    .forEach(predicateDefinition -> resources.add(swaggerResource(route.getId(),
+//                            predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
+//                                    .replace("**", "v2/api-docs"))));
+//        });
+//
+//        return resources;
+//    }
+
+
 
     private SwaggerResource swaggerResource(String name, String location) {
         log.info("name {}  location {}", name, location);
