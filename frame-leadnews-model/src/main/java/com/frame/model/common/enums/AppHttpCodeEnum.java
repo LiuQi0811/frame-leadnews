@@ -16,9 +16,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public enum AppHttpCodeEnum {
     SUCCESS(0, "操作成功"),
+    NEED_LOGIN(1, "需要登录后操作"),
     LOGIN_PASSWORD_ERROR(2, "密码错误"),
     LOGIN_STATUS_ERROR(3, "用户状态异常，请联系管理员"),
     PARAM_INVALID(50, "无效参数"),
+    SERVER_ERROR(503, "服务器内部错误"),
     DATA_EXIST(1000, "数据已存在"),
     DATA_NOT_EXIST(1002, "数据不存在"),
     DATA_INSERT_ERROR(510, "数据保存失败"),

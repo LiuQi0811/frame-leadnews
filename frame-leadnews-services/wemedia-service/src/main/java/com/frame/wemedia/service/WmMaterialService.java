@@ -1,7 +1,9 @@
 package com.frame.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.frame.model.common.ResponseResult;
 import com.frame.model.wemedia.pojo.WmMaterial;
+import org.springframework.web.multipart.MultipartFile;
 
 /*
  *@ClassName WmMaterialService
@@ -11,4 +13,10 @@ import com.frame.model.wemedia.pojo.WmMaterial;
  *@Version 1.0
  */
 public interface WmMaterialService  extends IService<WmMaterial> {
+    /**
+     * 上传图片素材
+     * @param multipartFile
+     * @return
+     */
+    ResponseResult<WmMaterial> uploadPicture(MultipartFile multipartFile);
 }
