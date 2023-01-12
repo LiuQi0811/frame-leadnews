@@ -14,23 +14,25 @@ public class WmThreadLocalUtils {
 
     /**
      * 设置当前线程中的用户信息
+     * @param wmUser
      */
-    public static void setUser(){
-
+    public static void setUser(WmUser wmUser) {
+        userThreadLocal.set(wmUser);
     }
 
     /**
      * 获取线程中的用户信息
+     *
      * @return
      */
-    public static WmUser getUser(){
-        return null;
+    public static WmUser getUser() {
+        return userThreadLocal.get();
     }
 
     /**
      * 清空线程中的用户信息
      */
-    public static void clear(){
-
+    public static void clear() {
+        userThreadLocal.remove();
     }
 }
